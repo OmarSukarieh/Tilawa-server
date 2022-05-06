@@ -1,0 +1,10 @@
+const router = require("express").Router();
+const { getMe, getTeacher, getTeachers } = require("../controller/teacher.controller");
+
+const { protectEmployee, protectTeacher } = require('../middleware/auth')
+
+router.route("/").get(protectEmployee, getTeachers);
+router.route("/me").get(protectTeacher, getMe);
+router.route("/:teacherId").get(protectEmployee, getTeacher);
+
+module.exports = router;
