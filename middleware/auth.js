@@ -70,6 +70,40 @@ exports.protectTeacher = asyncHandler(async (req, res, next) => {
   }
 });
 
+exports.protectUserTeacher = asyncHandler(async (req, res, next) => {
+  let token;
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies.token) {
+    token = req.cookies.token;
+  }
+
+  if (!token) {
+    return next(new ErrorResponse("Not authorize to access this route", 401));
+  }
+
+  try {
+    const decoded = await jwt.verify(token, config.jwtSecret);
+    if (decoded.type !== 'teacher' && decoded.type !== 'user') return next(new ErrorResponse("Not authorize to access this route", 401));
+    if (decoded.type === 'teacher') {
+      const teacher = await Teacher.findByPk(decoded.id);
+      if (!teacher) return next(new ErrorResponse("Not authorize to access this route", 401));
+      req.teacher = teacher;
+    } else {
+      const user = await User.findByPk(decoded.id);
+      if (!user) return next(new ErrorResponse("Not authorize to access this route", 401));
+      req.user = user;
+    }
+    next();
+  } catch (error) {
+    return next(new ErrorResponse("Not authorize to access this route", 401));
+  }
+})
+
 exports.protectEmployee = asyncHandler(async (req, res, next) => {
   let token;
 
