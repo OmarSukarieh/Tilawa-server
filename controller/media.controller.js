@@ -12,7 +12,7 @@ const {
 } = require("../models");
 
 exports.createMedia = asyncHandler(async (req, res, next) => {
-  const { chatId } = req.query;
+  const { params: chatId } = req.params;
 
   if (!chatId) return next(new ErrorResponse(`please add chatId in the params for upload`, 422));
 
@@ -65,12 +65,12 @@ exports.createMedia = asyncHandler(async (req, res, next) => {
 
   res.json({
     success: true,
-    data: config.appUrl + finalPath.substring(8)
+    data: config.appUrl + '/api/media/chat/' + file.name
   })
 })
 
 exports.getMedia = asyncHandler(async (req, res, next) => {
-  const { fileName } = req.params;
+  const { params: fileName } = req.params;
 
   if (!fileName) return next(new ErrorResponse(`please add fileName in the params`, 422));
 
