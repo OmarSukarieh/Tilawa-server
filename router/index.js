@@ -6,5 +6,6 @@ router.use("/api/user", require("./user.routes"));
 router.use("/api/teacher", require("./teacher.routes"));
 router.use("/api/chat", require("./chat.routes"));
 router.use("/api/message", require("./message.routes"));
+router.use("/api/media", require("./media.routes"));
 
 module.exports = router;

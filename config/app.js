@@ -24,4 +24,6 @@ module.exports = {
   dbPasswordDeploy: process.env.DB_PASS_DEPLOY,
   dbHostDeploy: process.env.DB_HOST_DEPLOY,
   dbDatabaseDeploy: process.env.DB_DB_DEPLOY,
+
+  fileUploadPathChat: process.env.FILE_UPLOAD_PATH_CHAT
 };
