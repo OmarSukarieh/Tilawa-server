@@ -44,7 +44,7 @@ exports.loginUserTeacher = asyncHandler(async (req, res, next) => {
   const token = jwt.sign({ id: userTeacher.id, type: isTeacher ? "teacher" : "user" }, config.jwtSecret, { expiresIn: config.jwtExpire });
 
   const options = {
-    expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    expires: new Date(Date.now() + 365 * 60 * 60 * 1000),
     httpOnly: true,
   };
 
