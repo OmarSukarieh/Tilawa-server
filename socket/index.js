@@ -145,6 +145,8 @@ const SocketServer = (server) => {
             });
             teachers.set(teacher.id, teacher);
           }
+        } else {
+          socket.conn.close();
         }
       } catch (error) {
         socket.conn.close();
@@ -164,6 +166,8 @@ const SocketServer = (server) => {
         } else if (decoded.type === "teacher") {
           teacherId = decoded.id;
           userId = msg.userId;
+        } else {
+          socket.conn.close();
         }
 
         const findChat = await Chat.findOne({
