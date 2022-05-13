@@ -150,8 +150,8 @@ exports.getAllMessages = asyncHandler(async (req, res, next) => {
         },
         {
           model: Message,
-          attributes: ["id", "message", "createdAt", "fromUserId"],
-          order: [["createdAt", "ASC"]],
+          order: [["createdAt", "DESC"]],
+          limit: 20,
         },
       ],
       attributes: ["id"],
@@ -176,8 +176,8 @@ exports.getAllMessages = asyncHandler(async (req, res, next) => {
         },
         {
           model: Message,
-          attributes: ["id", "message", "createdAt", "fromUserId"],
-          order: [["createdAt", "ASC"]],
+          order: [["createdAt", "DESC"]],
+          limit: 20,
         },
       ],
       attributes: ["id"],
