@@ -132,7 +132,7 @@ exports.sendMessage = asyncHandler(async (req, res, next) => {
 })
 
 exports.getAllMessages = asyncHandler(async (req, res, next) => {
-  const { user: userIdQuery, teacher: teacherIdQuery } = req.query;
+  const { user: userIdQuery, teacher: teacherIdQuery, offset } = req.query;
 
   if (!userIdQuery && !teacherIdQuery) return next(new ErrorResponse(`Missing user or teacher params`, 422))
 
@@ -151,6 +151,7 @@ exports.getAllMessages = asyncHandler(async (req, res, next) => {
         {
           model: Message,
           order: [["createdAt", "DESC"]],
+          offset: offset ? offset : 0,
           limit: 20,
         },
       ],
@@ -177,6 +178,7 @@ exports.getAllMessages = asyncHandler(async (req, res, next) => {
         {
           model: Message,
           order: [["createdAt", "DESC"]],
+          offset: offset ? offset : 0,
           limit: 20,
         },
       ],
