@@ -162,7 +162,6 @@ const SocketServer = (server) => {
           messageType: msg.type,
           fromTeacherId: teacherId,
         });
-        console.log(users?.get(userId)?.sockets[0], userSockets.has(users?.get(userId)?.sockets[0]))
         users?.get(userId)?.sockets?.map((e) => {
           if (userSockets.has(e)) {
             io.to(e).emit("receive", createMessage);
