@@ -134,10 +134,15 @@ const SocketServer = (server) => {
         where: { teacherId, userId },
       });
 
-      let chatId;
+      let chatId, userData, teacherData;
       if (!findChat) {
         const createChat = await Chat.create({ teacherId, userId });
         chatId = createChat.id;
+        if (typeUserTeacher.type === "user") {
+          userData = await User.findByPk(userId, { attributes: ['id', 'firstName', 'lastName'] });
+        } else if (typeUserTeacher.type === "teacher") {
+          teacherData = await Teacher.findByPk(teacherId, { attributes: ['id', 'firstName', 'lastName'] });
+        }
       } else {
         chatId = findChat.id;
       }
@@ -152,7 +157,7 @@ const SocketServer = (server) => {
         });
         teachers?.get(teacherId)?.sockets?.map((e) => {
           if (teacherSockets.has(e)) {
-            io.to(e).emit("receive", createMessage);
+            io.to(e).emit("receive", { ...createMessage.dataValues, User: userData });
           }
         });
       } else if (typeUserTeacher.type === "teacher") {
@@ -164,7 +169,7 @@ const SocketServer = (server) => {
         });
         users?.get(userId)?.sockets?.map((e) => {
           if (userSockets.has(e)) {
-            io.to(e).emit("receive", createMessage);
+            io.to(e).emit("receive", { ...createMessage.dataValues, Teacher: teacherData });
           }
         });
       }
