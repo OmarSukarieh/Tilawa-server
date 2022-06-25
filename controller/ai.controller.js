@@ -68,6 +68,13 @@ exports.getAiController = asyncHandler(async (req, res, next) => {
   // //   console.log(aiArr);
   // //   console.log(orginalArr.length);
 
+  console.log({
+    success: true,
+    aiString,
+    orginalString,
+    falseWord,
+  })
+
   res.json({
     success: true,
     aiString,
