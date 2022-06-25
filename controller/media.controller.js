@@ -55,6 +55,8 @@ exports.createMedia = asyncHandler(async (req, res, next) => {
 
   const finalPath = `${pathChat}/${file.name}`
 
+  console.log(finalPath)
+
   file.mv(finalPath, async (err) => {
     if (err) {
       console.error(err);

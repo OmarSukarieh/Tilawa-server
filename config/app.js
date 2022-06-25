@@ -25,5 +25,6 @@ module.exports = {
   dbHostDeploy: process.env.DB_HOST_DEPLOY,
   dbDatabaseDeploy: process.env.DB_DB_DEPLOY,
 
-  fileUploadPathChat: process.env.FILE_UPLOAD_PATH_CHAT
+  fileUploadPathChat: process.env.FILE_UPLOAD_PATH_CHAT,
+  fileUploadPathAi: process.env.FILE_UPLOAD_PATH_AI
 };

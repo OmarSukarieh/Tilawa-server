@@ -24,7 +24,7 @@ module.exports = {
       },
       messageType: {
         type: Sequelize.ENUM({
-          values: ['audio', 'video', 'photo', 'text']
+          values: ['audio', 'video', 'image', 'text']
         }),
         allowNull: false
       },
