@@ -13,3 +13,4 @@ migrate db: sequelize db:migrate
 Seed db: sequelize db:seed:all
 
 then run : npm start to start the server on development mode
+.
